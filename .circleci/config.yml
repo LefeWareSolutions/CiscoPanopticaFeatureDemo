@@ -2,13 +2,13 @@ version: 2
 jobs:
   build:
     docker:
-      - image: jetcipher/circleci-dotnet-core:3.0
+      - image:  mcr.microsoft.com/dotnet/aspnet:6.0
     steps:
       - checkout
       - run:
           name: Restore
           command: dotnet restore
-          working_directory: src/HelloWorldPanoptica.Api
+          working_directory: src
       - run:
           name: Build
           command: dotnet build -c Release
