@@ -12,7 +12,7 @@ jobs:
       - run:
           name: Build
           command: dotnet build -c Release
-          working_directory: src/HelloWorldPanoptica.Api
+          working_directory: src
       # - run:
       #     name: Running Tests
       #     command: dotnet test
@@ -26,3 +26,12 @@ jobs:
       #       echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
       #       docker tag boku herocod3r/MyProject
       #       docker push herocod3r/MyProject
+
+      - portshiftscanner/scan-image:
+          requires:
+            - docker-build
+          context: portshift-credentials
+          image_name: <image-name>
+          image_tag: <image-tag>
+          access_key: ${ACCESS_KEY}
+          secret_key: ${SECRET_KEY}
